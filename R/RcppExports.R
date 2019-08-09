@@ -2,14 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 KlokeAlg <- function(sample, set, sigma, omega, iter, step) {
-    .Call(`_denoiseTDA_KlokeAlg`, sample, set, sigma, omega, iter, step)
+    .Call('_denoiseTDA_KlokeAlg', PACKAGE = 'denoiseTDA', sample, set, sigma, omega, iter, step)
 }
 
 MeanShiftAlg <- function(set, sigma, iter, step) {
-    .Call(`_denoiseTDA_MeanShiftAlg`, set, sigma, iter, step)
+    .Call('_denoiseTDA_MeanShiftAlg', PACKAGE = 'denoiseTDA', set, sigma, iter, step)
 }
 
 KDE <- function(set, sigma) {
-    .Call(`_denoiseTDA_KDE`, set, sigma)
+    .Call('_denoiseTDA_KDE', PACKAGE = 'denoiseTDA', set, sigma)
 }
 
