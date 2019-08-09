@@ -1,6 +1,7 @@
 #------STORING FUNCTIONS ---------
 ## CUSTOM FUNCTIONS
 
+#' @export
 GridGen <- function(Xlim, Ylim, by){
   # Generates Grid 
   Xseq=seq(Xlim[1], Xlim[2], by=by)
@@ -8,6 +9,8 @@ GridGen <- function(Xlim, Ylim, by){
   Grid=expand.grid(Xseq,Yseq)
   return(list(Grid=Grid, Xseq=Xseq, Yseq=Yseq))
 }
+
+#' @export
 CircleGen<-function(init=c(0,0), R=1, N=100){
   #Generates points on Circle
   # N - Number of Datapoints 
@@ -27,7 +30,7 @@ CircleGen<-function(init=c(0,0), R=1, N=100){
 }
 
 
-
+#' @export
 NoisyGen<-function(Data, var=0.1, mean=0){
   # ADDS NOISE----
   # Mean - mean
@@ -41,6 +44,8 @@ NoisyGen<-function(Data, var=0.1, mean=0){
   NoisyC<- matrix(set, nrow= length(Data[,1]), ncol= length(Data[1,]))
   return(NoisyC)
 }
+
+#' @export
 ListToData<-function(List){
   #list to dataframe
   Data<- data.frame(row.names = 1:length(List[[1]]))
@@ -53,6 +58,8 @@ ListToData<-function(List){
   
   return(Data)
 }
+
+#' @export
 MatToData<-function(Mat){
   # Matrix to dataframe
   if(length(Mat[1,])==2){
