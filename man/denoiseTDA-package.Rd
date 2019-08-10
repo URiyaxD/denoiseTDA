@@ -3,7 +3,7 @@
 \alias{denoiseTDA}
 \docType{package}
 \title{
-  A short title line describing what the package does
+  Denoising Data and some functions for 
 }
 \description{
   A more detailed description of what the package does. A length

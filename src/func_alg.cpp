@@ -1,11 +1,8 @@
 #include <Rcpp.h>
 #include <cmath> 
-#include <iostream>
 #include <stdexcept>
 
-
 using namespace Rcpp;
-using namespace std;
 
 
 /*Below is a code for compiling the Kloke's Algorithm 
@@ -19,23 +16,27 @@ using namespace std;
 
 
 
-NumericMatrix gradient(NumericMatrix setX, NumericMatrix setP, double sigma){
-  int lenRowP=setX.nrow();
-  int lenRowX=setP.nrow();
+NumericMatrix gradient( NumericMatrix setX, NumericMatrix setP, double sigma){
+  int lenRowP=setP.nrow();
+  int lenRowX=setX.nrow();
   int lenCol=setX.ncol(); 
   NumericMatrix grad(lenRowX, lenCol);
-  NumericMatrix emptySet(lenCol);
   for(int x=0; x<lenRowX; x++){
-    NumericVector sum=clone(emptySet);
+    NumericVector sum(lenCol);
     for(int p=0; p< lenRowP;p++ ){
       // ------DISTANCE CALCULATOR-------------
       double dist=0;
       for(int j=0; j<lenCol; j++){
-        dist=dist+(setX(x,j)-setP(p,j))*(setX(x,j)-setP(p,j)); 
+        double X=setX(x,j);
+        double P=setP(p, j);
+       
+        dist=dist+(X-P)*(X-P); 
+       
       }
       // ------END OF DISTANCE CALCULATOR------
       for(int i=0; i<lenCol; i++){
         sum[i]=sum[i]+(-(setX(x,i)-setP(p,i))/(sigma*sigma))*exp(-dist/(2*sigma*sigma));
+        
       }
     }
     grad(x, _)=sum;
@@ -44,16 +45,20 @@ NumericMatrix gradient(NumericMatrix setX, NumericMatrix setP, double sigma){
 }
 
 
-NumericMatrix KlokeShift(NumericMatrix sample,NumericMatrix set, double sigma, double omega, double step){
+NumericMatrix KlokeShift(NumericMatrix sample ,NumericMatrix set, double sigma, double omega, double step){
   int ncol=sample.ncol();
   int nrowP=set.nrow();
   int nrowX=sample.nrow();
   NumericMatrix V1=gradient(sample, set, sigma);
-  NumericMatrix V2=gradient(sample, sample, sigma);
+  
+  NumericMatrix sampleC=clone(sample);
+  NumericMatrix V2=gradient( sampleC, sample, sigma);
+ 
   NumericMatrix shift(nrowX, ncol);
   int SetSize=ncol*nrowX;
   for(int i=0; i<SetSize; i++){
     shift[i]=V1[i]/nrowP-(V2[i]*omega)/nrowX;
+    
   }
   
   return shift;
@@ -91,26 +96,32 @@ NumericMatrix KlokeAlg(NumericMatrix sample,NumericMatrix set, double sigma, dou
   NumericMatrix FindMax=KlokeShift(sample, set, sigma, omega, step);
   double M=MaxMagnitude(FindMax);
   double c=step*M;
+ 
   //----------FINISH of determining c and M ---------
   // Cloning sample to Sn
   NumericMatrix Sn= clone(sample);
+ 
   int lenSet=set.nrow();
   int lenSample=sample.nrow();
-  if(lenSet<lenSample){
-    throw invalid_argument("Yooo, dude probably you misplaced sample set with the original set, try to switch them.");
-  }else{
-    int lenCol=sample.ncol();
-    int size=lenCol*lenSample;
-    //----------COMPUTING SHIFT AND SHIFTING POINTS ---
-    for(int i=0; i<iter; i++){
-      NumericMatrix shifting=KlokeShift(Sn, set, sigma, omega, step);
-      for(int j=0; j<size; j++){
-        Sn[j]=Sn[j]+c*shifting[j]/M;
-      }
+  {
+    using namespace std;
+    if(lenSet<lenSample){
+      throw invalid_argument("Yooo, dude probably you misplaced sample set with the original set, try to switch them.");
     }
-    //---------FINISH computing shift------------------
-    return Sn;
   }
+  int lenCol=sample.ncol();
+  int size=lenCol*lenSample;
+  //----------COMPUTING SHIFT AND SHIFTING POINTS ---
+  for(int i=0; i<iter; i++){
+    NumericMatrix shifting=KlokeShift(Sn, set, sigma, omega, step);
+    
+    for(int j=0; j<size; j++){
+      Sn[j]=Sn[j]+c*shifting[j]/M;
+    }
+  }
+  //---------FINISH computing shift------------------
+  return Sn;
+  
 }
 
 // [[Rcpp::export]]
