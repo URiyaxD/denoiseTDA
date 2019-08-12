@@ -22,8 +22,8 @@ CircleGen<-function(init=c(0,0), R=1, N=100){
   y<-c()
   ang=0
   while(ang<360 ){
-    x<-c(x+init[1], R*cos(ang))
-    y<-c(y+init[2], R*sin(ang))
+    x<-c(x, R*cos(ang)+init[1])
+    y<-c(y, R*sin(ang)+init[2])
     ang<-ang+fr
   }
   return(matrix(c(x,y), nrow = length(x), ncol = 2))
