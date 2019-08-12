@@ -47,11 +47,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// KlokeKDE
+NumericMatrix KlokeKDE(NumericMatrix sample, NumericMatrix set, double sigma, double omega);
+RcppExport SEXP _denoiseTDA_KlokeKDE(SEXP sampleSEXP, SEXP setSEXP, SEXP sigmaSEXP, SEXP omegaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type sample(sampleSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type set(setSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< double >::type omega(omegaSEXP);
+    rcpp_result_gen = Rcpp::wrap(KlokeKDE(sample, set, sigma, omega));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_denoiseTDA_KlokeAlg", (DL_FUNC) &_denoiseTDA_KlokeAlg, 6},
     {"_denoiseTDA_MeanShiftAlg", (DL_FUNC) &_denoiseTDA_MeanShiftAlg, 4},
     {"_denoiseTDA_KDE", (DL_FUNC) &_denoiseTDA_KDE, 2},
+    {"_denoiseTDA_KlokeKDE", (DL_FUNC) &_denoiseTDA_KlokeKDE, 4},
     {NULL, NULL, 0}
 };
 

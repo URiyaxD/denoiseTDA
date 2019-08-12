@@ -184,3 +184,46 @@ NumericMatrix KDE(NumericMatrix set, double sigma){
   return Out;
 }
 
+// [[Rcpp::export]]
+NumericMatrix KlokeKDE(NumericMatrix sample,NumericMatrix set, double sigma, double omega){
+  int Xrow=sample.nrow();
+  int Prow=set.nrow();
+  int ncol=set.ncol();
+  NumericVector D(Xrow);
+  for(int x=0; x<Xrow; x++){
+    double sum=0;
+    for(int p=0; p<Prow; p++){
+      double dist=0;
+      for(int c=0; c<ncol; c++){
+        dist=dist+(sample(x,c)-set(p,c))*(sample(x,c)-set(p,c));
+      }
+      sum=sum+exp(-dist/(2*sigma*sigma))/Prow;
+    }
+    D(x)=sum;
+  }
+  NumericVector Sn(Xrow);
+  for(int x=0; x<Xrow; x++){
+    double sum=0;
+    for(int p=0; p<Xrow; p++){
+      double dist=0;
+      for(int c=0; c<ncol; c++){
+        dist=dist+(sample(x,c)-sample(p,c))*(sample(x,c)-sample(p,c));
+      }
+      sum=sum+omega*exp(-dist/(2*sigma*sigma))/Xrow;
+    }
+    Sn(x)=sum;
+  }
+  
+  
+  NumericMatrix Out(Xrow, ncol+1);
+  for(int x=0; x<Xrow; x++){
+    for(int i=0; i<ncol; i++){
+      Out(x,i)=sample(x,i);
+    }
+    Out(x, ncol)=D(x)-Sn(x);
+  }
+  
+  return Out;
+  
+  
+}

@@ -13,3 +13,7 @@ KDE <- function(set, sigma) {
     .Call('_denoiseTDA_KDE', PACKAGE = 'denoiseTDA', set, sigma)
 }
 
+KlokeKDE <- function(sample, set, sigma, omega) {
+    .Call('_denoiseTDA_KlokeKDE', PACKAGE = 'denoiseTDA', sample, set, sigma, omega)
+}
+
