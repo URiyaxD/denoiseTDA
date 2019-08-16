@@ -1,30 +1,26 @@
-\name{NoisyGen}
-\alias{NoisyGen}
+\name{MatSample}
+\alias{MatSample}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Generates Noise over the Matrix
+Salect a sample from matrix
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Selects sample of length `N` from the matrix `Mat`. Keeping the demension. 
 }
 \usage{
-NoisyGen(Data, var = 0.1, mean = 0)
+MatSample(Mat, N = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Data}{
-%%     ~~Describe \code{Data} here~~
-Must be in a form of matrix
+  \item{Mat}{
+%%     ~~Describe \code{Mat} here~~
+Your any matrix, any dimension. Dimension is a number of columns in the matrix.
 }
-  \item{var}{
-%%     ~~Describe \code{var} here~~
-variance, how noisy you want it to be
-}
-  \item{mean}{
-%%     ~~Describe \code{mean} here~~
-mean value
-
+  \item{N}{
+%%     ~~Describe \code{N} here~~
+A length of the sample (number of rows) you want to select.
 }
 }
 \details{
@@ -36,6 +32,8 @@ mean value
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
+
+Returned another matrix with same dimension and row length = `N`.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -58,16 +56,16 @@ mean value
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Data, var = 0.1, mean = 0) 
+function (Mat, N = 100) 
 {
-    set <- c()
-    for (i in 1:length(Data[1, ])) {
-        noise <- rnorm(length(Data[, 1]), mean, var)
-        set <- c(set, Data[, i] + noise)
+    ncol <- length(Mat[, 1])
+    nrow <- length(Mat[1, ])
+    sam <- sample(1:nrow, N)
+    selected <- matrix(Mat[sam[1], ], ncol = ncol)
+    for (i in 2:N) {
+        selected <- rbind(selected, matrix(Mat[sam[i], ], ncol = ncol))
     }
-    NoisyC <- matrix(set, nrow = length(Data[, 1]), ncol = length(Data[1, 
-        ]))
-    return(NoisyC)
+    return(selected)
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
