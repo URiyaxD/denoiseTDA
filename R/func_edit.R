@@ -75,4 +75,16 @@ MatToData<-function(Mat){
 }
 
 
+#' @export
+MatSample<- function(Mat, N=100){
+  #select sample of the matrix
+  ncol<-length(Mat[,1])
+  nrow<-length(Mat[1,])
+  sam<-sample(1:nrow, N)
+  selected<-matrix(Mat[sam[1],], ncol=ncol )
+  for( i in 2:N){
+    selected<-rbind(selected, matrix(Mat[sam[i], ], ncol=ncol))
+  }
+  return(selected)
+}
 
