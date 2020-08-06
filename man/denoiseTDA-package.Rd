@@ -6,7 +6,7 @@
   Denoising Data and some functions for 
 }
 \description{
-  This package contains two algorithms, Klokes algorithm^(1) and mean shift algorithm^(2), which de-noise data for further topological data analysis.
+  This package contains two algorithms, Klokes algorithm (1) and mean shift algorithm (2), which de-noise data for further topological data analysis.
 }
 \details{
   KlokeKDE, KlokeAlg, and MeanShiftAlg are main functions for denoising, the rest are supporting function to test the results. 
