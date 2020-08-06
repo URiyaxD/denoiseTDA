@@ -47,4 +47,7 @@
    }
 
  }
+<<<<<<< HEAD
 >>>>>>> parent of 5cec74c... Update denoiseTDA-package.Rd
+=======
+>>>>>>> ca64db45494cc7f860a931a3b9a8bb1b855b1211
