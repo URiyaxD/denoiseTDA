@@ -17,5 +17,3 @@
    (2) Fukunaga, K., & Hostetler, L.D. (1975). The estimation of the gradient of a density function, with applications in pattern recognition. IEEE Trans. Inf. Theory, 21, 32-40.
 }
 \keyword{ package }
-
-}
