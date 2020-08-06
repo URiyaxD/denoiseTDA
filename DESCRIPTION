@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2019-08-09
 Author: Uriya Jankurazova
 Maintainer: Uriya Jankurazova <uriya.jan@outlook.com>
-Description: This package contains two algorithms, Kloke's algorithm^(1) and mean shift algorithm^(2), which de-noise data for further topological data analysis. Reference (1) Kloke, J. N., Carlsson, G., Kerckhoff, S., Mazzeo, R. (2010). Methods and applications of topological data analysis. Stanford University; (2) Fukunaga, K., & Hostetler, L.D. (1975). The estimation of the gradient of a density function, with applications in pattern recognition. IEEE Trans. Inf. Theory, 21, 32-40.
+Description: This package contains two algorithms, Kloke's algorithm (1) and mean shift algorithm (2), which de-noise data for further topological data analysis. Reference (1) Kloke, J. N., Carlsson, G., Kerckhoff, S., Mazzeo, R. (2010). Methods and applications of topological data analysis. Stanford University; (2) Fukunaga, K., & Hostetler, L.D. (1975). The estimation of the gradient of a density function, with applications in pattern recognition. IEEE Trans. Inf. Theory, 21, 32-40.
 License: GPL (>= 2)
 Encoding: UTF-8
 Imports: Rcpp (>= 1.0.2)
