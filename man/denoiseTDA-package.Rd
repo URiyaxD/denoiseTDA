@@ -3,8 +3,7 @@
 \alias{denoiseTDA}
 \docType{package}
 \title{
-<<<<<<< HEAD
-  Denoising Data and some functions for 
+  Denoising Data and some functions for Topological Data Analysis
 }
 \description{
   This package contains two algorithms, Klokes algorithm (1) and mean shift algorithm (2), which de-noise data for further topological data analysis.
@@ -28,13 +27,10 @@
    KlokeKDE, KlokeAlg, and MeanShiftAlg are main functions for denoising, the rest are supporting function to test the results. 
  }
  \author{
- Uriya
-
- Maintainer: Your Name <your@email.com>
+ Maintainer:  <uriya.jan@outlook.com>
  }
  \references{
-    (1) Kloke, J. N., Carlsson, G., Kerckhoff, S., Mazzeo, R. (2010). Methods and applications of topological data analysis. Stanford University.\\
-    (2) Fukunaga, K., & Hostetler, L.D. (1975). The estimation of the gradient of a density function, with applications in pattern recognition. IEEE Trans. Inf. Theory, 21, 32-40.
+    (1) Kloke, J. N., Carlsson, G., Kerckhoff, S., Mazzeo, R. (2010). Methods and applications of topological data analysis. Stanford University. (2) Fukunaga, K., & Hostetler, L.D. (1975). The estimation of the gradient of a density function, with applications in pattern recognition. IEEE Trans. Inf. Theory, 21, 32-40.
  }
  \keyword{ package }
  \seealso{
@@ -47,7 +43,4 @@
    }
 
  }
-<<<<<<< HEAD
->>>>>>> parent of 5cec74c... Update denoiseTDA-package.Rd
-=======
->>>>>>> ca64db45494cc7f860a931a3b9a8bb1b855b1211
+
